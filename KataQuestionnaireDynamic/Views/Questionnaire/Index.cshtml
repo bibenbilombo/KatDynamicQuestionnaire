@@ -1,0 +1,19 @@
+﻿@model List<FormularModel>
+@{
+    ViewData["Title"] = "Questionnaire";
+}
+
+<h1>Questionnaire</h1>
+
+<table>
+@foreach (var questionnaire in Model)
+{
+    <tr>
+        <td>
+            <a asp-controller="Question" asp-action="AfficherQuestions" asp-route-questionnaireId="@questionnaire.Id">@questionnaire.Id</a>
+        </td>
+    </tr>
+}
+</table>
+
+

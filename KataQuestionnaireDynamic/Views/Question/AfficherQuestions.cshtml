@@ -1,0 +1,43 @@
+﻿@model List<QuestionModel>
+
+<h1>Liste des questions pour le questionnaire</h1>
+
+@if (Model != null && Model.Any())
+{
+    <ul>
+        @foreach (var question in Model)
+        {
+            <div>
+                <h3>@question.Question</h3>
+                    <div>
+                        @if (question.Type == "Input_Text")
+                        {
+                            <input type="text" name="question_@question.Id" />
+                        }
+                        else if (question.Type == "Checkbox")
+                        {
+                            <label>
+                                <input type="checkbox" name="question_@question.Id"  />
+                            </label>
+                        }
+                        else if (question.Type == "Select_List" && question.Options != null )
+                        {
+                            <select name="question_@question.Id">
+                                @foreach (OptionModel item in question.Options)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                        }
+                    </div>
+            
+            </div>
+        }
+    </ul>
+}
+else
+{
+    <p>Aucune question n'a été trouvée pour ce questionnaire.</p>
+}
+
+@*https://localhost:7183/Question/AfficherQuestions?questionnaireId=1*@
